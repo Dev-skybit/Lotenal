@@ -1,0 +1,208 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+
+  display: flex;
+
+  height: 75px;
+  width: 100%;
+
+  padding: 0 3rem;
+
+  user-select: none;
+
+  background: $bg;
+
+  &__logo,
+  &__user {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    width: 50%;
+  }
+
+  &__logo {
+    justify-content: flex-start;
+
+    &__bars {
+      position: relative;
+      z-index: 10;
+
+      width: 20px;
+      height: 30px;
+
+      margin-right: 2rem;
+
+      cursor: pointer;
+      transition: $trans;
+
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+
+        width: 30px;
+        height: 2px;
+
+        background: $white;
+        border-radius: 20px;
+
+        transition: $trans;
+      }
+
+      &:after {
+        top: 10px;
+      }
+
+      &:before {
+        bottom: 10px;
+      }
+
+      &--active {
+        &:after {
+          top: 14px;
+
+          transform: rotate(120deg);
+        }
+
+        &:before {
+          bottom: 14px;
+
+          transform: rotate(-120deg);
+        }
+      }
+    }
+
+    &__img {
+      height: 50px;
+      width: 50px;
+
+      margin: 0 10px 0 30px;
+    }
+  }
+
+  &__user {
+    justify-content: flex-end;
+
+    height: 100%;
+    width: 50%;
+
+    &__btn {
+      @include btn;
+    }
+
+    &__phantom__btn {
+      @include phantom__btn($light-blue)
+    }
+
+    &__gradient__btn {
+      @include gradient__btn(linear-gradient(to right, $blue, $light-blue, $purple))
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    height: 100vh;
+    width: 100vw;
+
+    opacity: 0;
+    transition: $trans;
+    pointer-events: none;
+
+    &--active {
+      opacity: 1;
+      background: linear-gradient(rgba($color: #1B1B3F, $alpha: .6),
+          rgba($color: #17173B, $alpha:.9));
+      backdrop-filter: blur(10px);
+
+      pointer-events: all;
+    }
+
+    &__option {
+      color: white;
+      text-align: center;
+
+      position: relative;
+
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding: 2rem;
+
+      border: 1px solid $grey;
+      cursor: pointer;
+
+      p {
+        color: $grey;
+        transition: $trans;
+      }
+
+      &:hover {
+        color: $white;
+
+        background: linear-gradient($blue, $bg);
+
+        &>p {
+          color: $white;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          height: 4px;
+          width: 100%;
+          background: linear-gradient(90deg, $blue, $light-blue, $purple);
+        }
+      }
+    }
+  }
+
+  @include media("<=tablet") {
+    padding: 0 1rem;
+
+    img,
+    &__user__btn,
+    &__user__phantom__btn {
+      display: none;
+    }
+
+    span {
+      margin: 0 2rem 0 0;
+    }
+
+    &__menu {
+      grid-template-rows: repeat(4, 1fr);
+      grid-template-columns: 100%;
+    }
+  }
+
+  @include media("<=phone") {
+    height: 60px;
+
+    &__user__gradient__btn {
+      padding: .8rem;
+    }
+
+    &__logo {
+      h1 {
+        display: none;
+      }
+    }
+  }
+}

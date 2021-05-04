@@ -1,0 +1,129 @@
+.form {
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: $bg;
+
+  &__container {
+    display: flex;
+
+    height: 80vh;
+    width: 70%;
+
+    &__login,
+    &__signup {
+      color: $black;
+
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+
+      height: 100%;
+      width: 50%;
+
+      padding: 3rem;
+
+      &__close {
+        font-size: 1.4rem;
+
+        position: absolute;
+        top: 20px;
+
+        height: 40px;
+        width: 40px;
+
+        cursor: pointer;
+        user-select: none;
+
+        &--left {
+          left: 20px;
+        }
+
+        &--right {
+          right: 20px;
+        }
+      }
+
+      &__title {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        text-decoration: wavy $light-blue;
+      }
+
+      label {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        input {
+          color: $black;
+
+          width: 20rem;
+
+          margin-top: .4rem;
+          padding: .6rem 1rem;
+
+          border: 1px solid $black;
+          border-radius: 20px;
+          outline: none;
+          transition: $trans;
+
+          &:hover,
+          &:focus {
+            border-color: $light-blue;
+          }
+        }
+      }
+
+      &__btn {
+        @include phantom__btn($light-blue)
+      }
+    }
+
+    &__login {
+      background: white;
+      border-radius: 30px 0 0 30px;
+
+      &--invert {
+        border-radius: 0 30px 30px 0;
+      }
+    }
+
+    &__signup {
+      text-align: center;
+      color: $white;
+
+      justify-content: center;
+      gap: .6rem;
+
+      background: $blue;
+      border-radius: 0 30px 30px 0;
+
+      &--invert {
+        border-radius: 30px 0 0 30px;
+      }
+
+      &__btn {
+        @include phantom__btn($white);
+      }
+    }
+  }
+
+  span {
+    flex: 0 0;
+
+    font-size: .8rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: $red;
+
+    margin-top: .8rem;
+  }
+}
