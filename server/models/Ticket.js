@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    noTicket: {
+      type: DataTypes.STRING,
+    },
+
+    win: {
+      type: DataTypes.BOOLEAN
     }
   })
 

@@ -9,7 +9,7 @@ const db = require('./models')
 
 // Routers 
 const userRouter = require('./routes/User')
-app.use('/user', userRouter)
+app.use('/auth', userRouter)
 
 const ticketRouter = require('./routes/Ticket')
 app.use('/ticket', ticketRouter)

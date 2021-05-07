@@ -1,17 +1,55 @@
 const express = require('express')
 const router = express.Router()
 const { User } = require('../models')
-
-router.get('/', async (req, res) => {
-  const listOfUsers = await User.findAll()
-  res.json(listOfUsers)
-})
+const bcrypt = require('bcrypt')
+const { validateToken } = require('../middlewares/AuthMiddleware')
+const { sign } = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
-  const user = req.body
-  await User.create(user)
+  const { username, email, password } = req.body
 
-  res.json(user)
+  bcrypt.hash(password, 10).then((hash) => {
+    User.create({
+      username: username,
+      email: email,
+      password: hash
+    })
+    res.json("success")
+  })
 })
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body
+
+  let user = await User.findOne({ where: { email: email } })
+  if (!user) {
+    res.json({ error: "User doesn't exist" })
+  }
+
+  const validPassword = await bcrypt.compare(password, user.password)
+  if (!validPassword) {
+    res.json({ error: "Email or passwaord doesn't match" })
+  }
+
+  else {
+    const setUser = ({
+      email: user.email,
+      username: user.username,
+      id: user.id
+    })
+
+    const accessToken = sign({ user: setUser.username }, "importantSecret")
+
+    res.json({
+      user: setUser,
+      token: accessToken
+    })
+  }
+})
+
+router.get('/validate', validateToken, (req, res) => {
+  res.json(req.user)
+})
+
 
 module.exports = router

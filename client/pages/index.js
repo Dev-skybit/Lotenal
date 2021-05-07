@@ -1,22 +1,24 @@
 // React and Next imports
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-
-// Libraries imports
-import axios from 'axios'
 
 // Local components imports
 import Navbar from '../components/navbar'
 
-export default function index(props) {
-  const [listOfTickets, setListOfTickets] = useState([])
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3001/ticket')
+  const data = await res.json()
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/ticket").then((resp) => {
-      setListOfTickets(resp.data)
-    })
-  }, [])
+  return {
+    props: {
+      data
+    }
+  }
+}
+
+export default function index({ data }) {
+  const results = data
 
   return (
     <div>
@@ -52,12 +54,14 @@ export default function index(props) {
 
           <div className="shop__tickets">
             {
-              listOfTickets.map((value, key) => {
+              results.map(result => {
+                const { id, price, title, desc } = result
+
                 return (
-                  <Link href={`/tickets/byId/${value.id}`}>
+                  <Link href={`/tickets/${id}`} key={id}>
                     <div className="shop__tickets__ticket">
-                      <h3>{value.title} <span>${value.price}.00</span> </h3>
-                      <p>{value.desc}</p>
+                      <h3>{title} <span>${price}.00</span> </h3>
+                      <p>{desc}</p>
                     </div>
                   </Link>
                 )
@@ -84,6 +88,6 @@ export default function index(props) {
           </form>
         </section>
       </main>
-    </div >
+    </div>
   )
 }

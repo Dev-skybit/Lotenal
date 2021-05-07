@@ -14,17 +14,19 @@ export default function signup() {
   const router = useRouter()
 
   const initialValues = {
+    username: "",
     email: "",
     password: ""
   }
 
   const validationSchema = Yup.object().shape({
+    username: Yup.string().required(),
     email: Yup.string().email().required(),
     password: Yup.string().min(8).max(15).required()
   })
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/user", data).then((resp) => {
+    axios.post("http://localhost:3001/auth", data).then((resp) => {
       alert("Usuario registrado con éxito")
       router.push("login")
     })
@@ -49,6 +51,12 @@ export default function signup() {
             </Link>
 
             <h1 className="form__container__login__title">Crea una cuenta</h1>
+
+            <label htmlFor="" className="form__container__login__input">
+              <p>Nombre de Usuario</p>
+              <Field type="text" name="username" id="inputCreateUsername" />
+              <ErrorMessage name="username" component="span" />
+            </label>
 
             <label htmlFor="" className="form__container__login__input">
               <p>Correo Electrónico</p>

@@ -1,7 +1,82 @@
 .ticketContainer {
+  height: 100%;
   width: 90%;
 
   margin: 100px auto 0 auto;
 
-  border: 1px solid red;
+  &__ticket {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    margin-bottom: 2rem;
+    padding: 2rem;
+
+    background-clip: padding-box;
+    border: 5px solid transparent;
+    border-radius: 1rem;
+    background: $comp;
+    cursor: pointer;
+    transition: $trans;
+
+    p,
+    h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+
+
+      span {
+        color: $l-orange;
+      }
+    }
+
+    p {
+      color: $grey;
+      transition: all;
+    }
+
+    button {
+      @include gradient__btn($l-orange)
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+
+      z-index: -1;
+
+      margin: -8px;
+      border-radius: inherit;
+      background: linear-gradient($l-orange, $orange);
+    }
+
+    &:hover {
+      &:after {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      p {
+        color: $white;
+      }
+    }
+  }
+
+  &__info {
+    font-size: 1.2rem;
+    text-align: justify;
+    line-height: 2.2rem;
+    letter-spacing: .02rem;
+
+    p {
+      margin-bottom: 3rem;
+    }
+  }
 }

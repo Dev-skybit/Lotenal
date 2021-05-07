@@ -27,6 +27,10 @@
   &__logo {
     justify-content: flex-start;
 
+    h1 {
+      cursor: pointer;
+    }
+
     &__bars {
       position: relative;
       z-index: 10;
