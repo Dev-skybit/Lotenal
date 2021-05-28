@@ -1,14 +1,11 @@
-// React and Next imports
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// Libraries imports
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
-
 
 export default function signup() {
   const router = useRouter()
@@ -54,19 +51,19 @@ export default function signup() {
 
             <label htmlFor="" className="form__container__login__input">
               <p>Nombre de Usuario</p>
-              <Field type="text" name="username" id="inputCreateUsername" />
+              <Field type="text" name="username" id="inputCreateUsername" autoComplete="off" />
               <ErrorMessage name="username" component="span" />
             </label>
 
             <label htmlFor="" className="form__container__login__input">
               <p>Correo Electrónico</p>
-              <Field type="email" name="email" id="inputCreateUsername" />
+              <Field type="email" name="email" id="inputCreateUsername" autoComplete="off" />
               <ErrorMessage name="email" component="span" />
             </label>
 
             <label htmlFor="" className="form__container__login__input">
               <p>Contraseña</p>
-              <Field type="password" name="password" id="inputCreatePassword" />
+              <Field type="password" name="password" id="inputCreatePassword" autoComplete="off" />
               <ErrorMessage name="password" component="span" />
             </label>
 

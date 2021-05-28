@@ -1,10 +1,13 @@
 // React and Next imports
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { AuthContext } from '../../../helpers/AuthContext'
 import Link from 'next/link'
 
 // Local components imports
 import Navbar from '../../../components/navbar'
+import axios from 'axios'
 
 export async function getServerSideProps({ query }) {
   const { id } = query
@@ -19,9 +22,22 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function index({ data }) {
+  const { isAuth } = useContext(AuthContext)
+
+  const router = useRouter()
+  const { id } = router.query
+
+  console.log(id)
 
   const handleBuy = () => {
+    const data = {
+      TicketId: id,
+      UserId: isAuth.id
+    }
 
+    axios.post('http://localhost:3001/purchase/', data).then((resp) => {
+      alert("Ticket comprado")
+    })
   }
 
   const results = data
@@ -33,7 +49,14 @@ export default function index({ data }) {
 
       <div className="ticketContainer__ticket">
         <h3>{results.title} <span>${results.price}.00</span> </h3>
-        <p>{results.desc} <button onClick={() => handleBuy()}>Comprar</button></p>
+        <p>{results.desc} </p>
+        {!isAuth.status ? (
+          <Link href="/login">
+            <button>Inicia Sesión</button>
+          </Link>
+        ) : (
+          <button onClick={() => handleBuy()}>Comprar</button>
+        )}
       </div>
 
       <div className="ticketContainer__info">

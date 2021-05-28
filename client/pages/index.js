@@ -1,9 +1,7 @@
-// React and Next imports
-import React, { useEffect, useContext } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
-// Local components imports
 import Navbar from '../components/navbar'
 
 export async function getServerSideProps() {
@@ -73,7 +71,10 @@ export default function index({ data }) {
         <section className="ticket" id="ticket">
           <h1 className="sectionTitle">Comprueba tus cachitos</h1>
 
-          <form className="ticket__form">
+          <form className="ticket__form" onSubmit={ e => {
+            e.preventDefault()
+            alert("Boleto no ganador")
+          }}>
             <label>
               <p>Fecha del Sorteo </p>
               <input type="date" name="" id="" />

@@ -48,10 +48,15 @@ export default function navbar() {
             <Link href="profile">
               <button className="nav__user__btn">{isAuth.username}</button>
             </Link>
+            <Link href={`/cart/${isAuth.id}`}>
+              <button className="nav__user__btn">Carrito</button>
+            </Link>
           </>
         )}
 
-        <a href="#shop" className="nav__user__gradient__btn">Compra Billetes</a>
+        <Link href="/">
+          <a className="nav__user__gradient__btn">Compra Billetes</a>
+        </Link>
       </div>
 
       <div className={isActive ? 'nav__menu nav__menu--active' : 'nav__menu'}>

@@ -188,7 +188,6 @@ section {
 .ticket {
   padding: 4rem 0;
 
-
   &__form {
     display: flex;
     justify-content: center;
@@ -222,4 +221,17 @@ section {
       }
     }
   }
+}
+
+.cart{
+  margin-top: 100px;
+}
+
+.deletebtn{
+  padding: .3rem;
+
+  border-radius: .4rem;
+  background: $red;
+  border: none;
+  cursor: pointer;
 }

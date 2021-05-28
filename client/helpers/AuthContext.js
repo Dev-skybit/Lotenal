@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect } from 'react'
+import axios from 'axios'
 
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState({
     username: "",
+    email: "",
     id: 0,
     status: false
   })
@@ -16,14 +18,19 @@ const AuthProvider = ({ children }) => {
       if (auth) {
         console.log('You have a valid token')
 
-        const user = ({
-          email: auth.user.email,
-          username: auth.user.username,
-          id: auth.user.id,
-          status: true
-        })
+        let id = auth.user.id
+        let user = {}
 
-        setIsAuth(user)
+        axios.get(`http://localhost:3001/auth/profile/${id}`)
+          .then((response) => {
+            user = {
+              username: response.data.username,
+              email: response.data.email,
+              id: response.data.id,
+              status: true
+            }
+            setIsAuth(user)
+          })
       }
     }
     loadUser()

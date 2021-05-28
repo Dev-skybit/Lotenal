@@ -9,32 +9,33 @@ import axios from 'axios'
 export default function login() {
   const router = useRouter()
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [title, setTitle] = useState("")
+  const [desc, setDesc] = useState("")
+  const [date, setDate] = useState("")
   const { isAuth, setIsAuth } = useContext(AuthContext)
 
   const handleSubmit = async event => {
     event.preventDefault()
 
-    const user = {
-      email: email,
-      password: password
+    const post = {
+      title: title,
+      desc: desc,
+      date: date
     }
 
-    axios.post("http://localhost:3001/auth/login", user).then((resp) => {
+    axios.post("http://localhost:3001/post", post).then((resp) => {
       if (resp.data.error) {
         alert(resp.data.error)
       }
 
       else {
-        localStorage.setItem("accessToken", JSON.stringify(resp.data))
-        setIsAuth({ ...isAuth, status: true })
         router.push("/")
       }
     })
 
-    setEmail("")
-    setPassword("")
+    setTitle("")
+    setDesc("")
+    setDate("")
   }
 
   return (
@@ -47,18 +48,25 @@ export default function login() {
             <div className="form__container__login__close form__container__login__close--left"> X </div>
           </Link>
 
-          <h1 className="form__container__login__title">Inicia Sesión</h1>
+          <h1 className="form__container__login__title">Crear un nuevo post</h1>
           <label htmlFor="" className="form__container__login__input">
-            <p>Correo Electrónico</p>
-            <input type="email" name="email" id="inputLoginEmail" autoComplete="off" onChange={(e) => {
-              setEmail(e.target.value)
+            <p>Título del post</p>
+            <input type="text" name="title" id="inputTitlePost" onChange={(e) => {
+              setTitle(e.target.value)
             }} />
           </label>
 
           <label htmlFor="" className="form__container__login__input">
-            <p>Contraseña</p>
-            <input type="password" name="password" id="inputLoginPassword" autoComplete="off" onChange={(e) => {
-              setPassword(e.target.value)
+            <p>Descripción del post</p>
+            <input type="text" name="desc" id="inputDescPost" onChange={(e) => {
+              setDesc(e.target.value)
+            }} />
+          </label>
+
+          <label htmlFor="" className="form__container__login__input">
+            <p>Fecha de publicación</p>
+            <input type="date" name="date" id="inputDatePost" onChange={(e) => {
+              setDate(e.target.value)
             }} />
           </label>
 
