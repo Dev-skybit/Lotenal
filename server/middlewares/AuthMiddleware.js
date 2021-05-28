@@ -9,6 +9,7 @@ const validateToken = (req, res, next) => {
     const validToken = verify(accessToken, "importantSecret")
 
     if (validToken) return next()
+    
   } catch (err) {
     return res.json({ error: err })
   }

@@ -33,8 +33,6 @@ router.post('/login', async (req, res) => {
 
   else {
     const setUser = ({
-      email: user.email,
-      username: user.username,
       id: user.id
     })
 
@@ -51,5 +49,13 @@ router.get('/validate', validateToken, (req, res) => {
   res.json(req.user)
 })
 
+
+router.get('/profile/:id', async(req, res) => {
+  const id = req.params.id
+
+  const info = await User.findByPk(id);
+
+  res.json(info)
+})
 
 module.exports = router

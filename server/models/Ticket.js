@@ -26,5 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
+  Ticket.associate = (models) => {
+    Ticket.hasMany(models.Purchases),{
+      onDelete: "cascade",
+    }
+  }
+  
   return Ticket
 }
