@@ -21,7 +21,7 @@ export default function login() {
       password: password
     }
 
-    axios.post("http://localhost:3001/auth/login", user).then((resp) => {
+    axios.post("https://lotenal-api.herokuapp.com/auth/login", user).then((resp) => {
       if (resp.data.error) {
         alert(resp.data.error)
       }

@@ -23,7 +23,7 @@ export default function login() {
       date: date
     }
 
-    axios.post("http://localhost:3001/post", post).then((resp) => {
+    axios.post("https://lotenal-api.herokuapp.com/post", post).then((resp) => {
       if (resp.data.error) {
         alert(resp.data.error)
       }

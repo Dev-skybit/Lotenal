@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Navbar from '../components/navbar'
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3001/ticket')
+  const res = await fetch('https://lotenal-api.herokuapp.com/ticket')
   const data = await res.json()
 
   return {

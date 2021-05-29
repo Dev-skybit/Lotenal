@@ -23,7 +23,7 @@ export default function signup() {
   })
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/auth", data).then((resp) => {
+    axios.post("https://lotenal-api.herokuapp.com/auth", data).then((resp) => {
       alert("Usuario registrado con éxito")
       router.push("login")
     })

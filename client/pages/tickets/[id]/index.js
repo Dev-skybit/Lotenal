@@ -35,7 +35,7 @@ export default function index({ data }) {
       UserId: isAuth.id
     }
 
-    axios.post('http://localhost:3001/purchase/', data).then((resp) => {
+    axios.post('https://lotenal-api.herokuapp.com/purchase/', data).then((resp) => {
       alert("Ticket comprado")
     })
   }

@@ -53,7 +53,7 @@ export default function index({ data }) {
 
 export async function getServerSideProps({ query }) {
   const { id } = query
-  const res = await fetch(`http://localhost:3001/purchase/${id}`)
+  const res = await fetch(`https://lotenal-api.herokuapp.com/purchase/${id}`)
   const data = await res.json()
 
   return {
