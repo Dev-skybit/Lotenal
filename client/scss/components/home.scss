@@ -181,6 +181,10 @@ section {
           color: $white;
         }
       }
+
+      &--cart{
+        flex: 0 0 3rem;
+      }
     }
   }
 }

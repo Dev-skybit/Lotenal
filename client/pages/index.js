@@ -51,7 +51,7 @@ export default function index({ data }) {
           <h1 className="sectionTitle">Disponibles esta semana</h1>
 
           <div className="shop__tickets">
-            {
+            {data ? (
               results.map(result => {
                 const { id, price, title, desc } = result
 
@@ -64,6 +64,9 @@ export default function index({ data }) {
                   </Link>
                 )
               })
+            ) : (
+              <h1>No hay boletos disponibles</h1>
+            )
             }
           </div>
         </section>
@@ -71,7 +74,7 @@ export default function index({ data }) {
         <section className="ticket" id="ticket">
           <h1 className="sectionTitle">Comprueba tus cachitos</h1>
 
-          <form className="ticket__form" onSubmit={ e => {
+          <form className="ticket__form" onSubmit={e => {
             e.preventDefault()
             alert("Boleto no ganador")
           }}>

@@ -34,7 +34,7 @@ export default function index({ data }) {
 
                 return (
                   <form key={id} onSubmit={() => handleSubmit()}>
-                    <div className="shop__tickets__ticket">
+                    <div className="shop__tickets__ticket shop__tickets__ticket--cart">
                       <input type="hidden" value={`${id}`} />
                       <h3>{title} <span>${price}.00</span> </h3>
                       <p>{desc}</p>
